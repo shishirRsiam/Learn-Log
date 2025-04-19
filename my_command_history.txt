@@ -13,3 +13,6 @@
 19-04-2025 21:12:21  383  git commit -am "update readme.md files"
 19-04-2025 21:12:25  384  git push
 19-04-2025 21:22:24  385  git add .
+19-04-2025 21:22:27  386  git commit -am "Django EcoSystem"
+19-04-2025 21:22:31  387  git push
+19-04-2025 21:23:55  388  git add .
