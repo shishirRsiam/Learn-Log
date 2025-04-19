@@ -1,4 +1,4 @@
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=learnlog&label=Repository%Views&color=0e75b6&style=flat" alt="learnlog" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=learnlog&label=Repository%20Views&color=0e75b6&style=flat" alt="learnlog" /> </p>
 
 
 
