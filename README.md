@@ -1,3 +1,7 @@
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=learnlog&label=Repository%Views&color=0e75b6&style=flat" alt="learnlog" /> </p>
+
+
+
 # 📘 LearnLog
 
 A public collection of notes and Q&A in Markdown format — covering cloud, programming, web, databases, and more.  
@@ -28,3 +32,6 @@ Feel free to fork this repository, contribute, and share your knowledge!
 ---
 
 > **Note:** This is a work-in-progress. More topics will be added continuously.
+
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=shishirrsiam&label=Profile%20views&color=0e75b6&style=flat" alt="shishirrsiam" /> </p>
+
