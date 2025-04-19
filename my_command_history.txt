@@ -29,3 +29,6 @@
 19-04-2025 21:32:31  399  git push
 19-04-2025 21:37:44  400  it add .
 19-04-2025 21:37:56  401  git add .
+19-04-2025 21:37:59  402  git commit -am "What is Software Architecture and Why is it Important"
+19-04-2025 21:38:12  403  git push
+19-04-2025 21:42:39  404  git add .
