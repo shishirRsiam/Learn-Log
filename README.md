@@ -25,10 +25,6 @@ Feel free to fork this repository, contribute, and share your knowledge!
 2. Add your notes or questions
 3. Submit a pull request
 
-## 🔗 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 > **Note:** This is a work-in-progress. More topics will be added continuously.
