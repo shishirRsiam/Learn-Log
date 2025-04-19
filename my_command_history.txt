@@ -25,3 +25,7 @@
 19-04-2025 21:29:10  395  git commit -am "What is ORM Relational Databases"
 19-04-2025 21:29:14  396  git push
 19-04-2025 21:32:24  397  git add .
+19-04-2025 21:32:27  398  git commit -am "The Software Development Life Cycle (SDLC)"
+19-04-2025 21:32:31  399  git push
+19-04-2025 21:37:44  400  it add .
+19-04-2025 21:37:56  401  git add .
