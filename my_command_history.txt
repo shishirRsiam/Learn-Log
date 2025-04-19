@@ -32,3 +32,6 @@
 19-04-2025 21:37:59  402  git commit -am "What is Software Architecture and Why is it Important"
 19-04-2025 21:38:12  403  git push
 19-04-2025 21:42:39  404  git add .
+19-04-2025 21:42:43  405  git commit -am "Best Practices or Mindsets in Software Development"
+19-04-2025 21:42:46  406  git push
+19-04-2025 21:43:43  407  git add .
