@@ -38,3 +38,7 @@
 19-04-2025 21:43:46  408  git commit -am "Software Development Approaches Comparison"
 19-04-2025 21:43:53  409  git push
 19-04-2025 22:23:57  410  git add .
+19-04-2025 22:24:00  411  git commit -am "What is ORM and Relational Databases"
+19-04-2025 22:24:04  412  git push
+19-04-2025 22:46:50  364  -----END RSA PRIVATE KEY-----
+19-04-2025 22:47:32  365  git add .
