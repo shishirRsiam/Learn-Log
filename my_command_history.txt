@@ -42,3 +42,6 @@
 19-04-2025 22:24:04  412  git push
 19-04-2025 22:46:50  364  -----END RSA PRIVATE KEY-----
 19-04-2025 22:47:32  365  git add .
+19-04-2025 22:47:35  366  git commit -am "what is an Elastic Load Balancing"
+19-04-2025 22:47:38  367  git push
+19-04-2025 23:09:58  368  git add .
