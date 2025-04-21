@@ -5,25 +5,33 @@ on:
     branches: [main] # or any branch you prefer
 
 jobs:
-  notify:
+  send_email:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Send Email
+    - name: Send Fancy Email
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "🚀 New push to main branch"
+        subject: "🔥 New Push to Main – ${{ github.event.head_commit.message }}"
         to: ${{ secrets.EMAIL_TO }}
         from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
-        content_type: text/plain
+        content_type: text/html
         body: |
-          A new push was made to the main branch.
+          <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
+            <h2 style="color: #4CAF50;">🚀 New Code Just Landed!</h2>
+            <p><strong>Repository:</strong> <a href="https://github.com/${{ github.repository }}" style="color: #0366d6;">${{ github.repository }}</a></p>
+            <p><strong>Branch:</strong> <span style="color: #ff5722;">${{ github.ref_name }}</span></p>
+            <p><strong>Commit:</strong> <code>${{ github.sha }}</code></p>
+            <p><strong>Author:</strong> <span style="color: #009688;">${{ github.actor }}</span></p>
+            <p><strong>Message:</strong> <em>${{ github.event.head_commit.message }}</em></p>
 
-          Repo: ${{ github.repository }}
-          Commit: ${{ github.sha }}
-          By: ${{ github.actor }}
-          Message: ${{ github.event.head_commit.message }}
+            <a href="https://github.com/${{ github.repository }}/commit/${{ github.sha }}" style="margin-top: 15px; display: inline-block; background: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+              🔍 View Commit
+            </a>
+
+            <p style="margin-top: 30px; font-size: 0.9em; color: #777;">This is an automated notification sent from GitHub Actions 💬</p>
+          </div>
