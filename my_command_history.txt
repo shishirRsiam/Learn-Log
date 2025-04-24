@@ -87,3 +87,6 @@
 24-04-2025 14:00:11  391  -----END RSA PRIVATE KEY-----
 24-04-2025 14:00:16  391  -----END RSA PRIVATE KEY-----
 24-04-2025 14:03:04  392  git add .
+24-04-2025 14:03:06  393  git commit -am "How Shell Scripting Helps in Cybersecurity"
+24-04-2025 14:03:11  394  git push
+24-04-2025 14:08:05  395  git add .
