@@ -97,3 +97,7 @@
 29-01-2026 12:44:33   55  cd Learn-Log/
 29-01-2026 12:44:37   56  code .
 29-01-2026 12:45:26   52  ls -a
+29-01-2026 12:45:38   53  push "add Name.com Domain Setup notes"
+17-03-2026 12:39:20  140  cd Learn-Log/
+17-03-2026 12:39:25  141  code .
+17-03-2026 12:39:28  138  REMAINING=$(printf "%s\n" "$STAGED" | egrep -v "client/src/i18n/translations.ts|client/telpamp-report-2026-03-11.csv|client/telpamp.zip|server/FuelEntries/services.py|server/data.json" | tr '\n' ' ')
