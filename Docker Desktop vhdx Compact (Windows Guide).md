@@ -26,10 +26,31 @@ Docker-এর সব ডাটা (image, container, volume) একটা ফা
 ### টাস্ক যা করে, ক্রমানুসারে
 
 1. Docker Desktop চালু আছে কিনা দেখে নেয়
-2. চালু থাকলে ভেতরে TRIM চালায়, তারপর Docker Desktop বন্ধ করে
-3. `wsl --shutdown` চালিয়ে vhdx ফাইল ছাড়া পাওয়া পর্যন্ত অপেক্ষা করে (সর্বোচ্চ ৬০ সেকেন্ড)
-4. `Optimize-VHD -Mode Full` দিয়ে compact করে; সেটা ব্যর্থ হলে diskpart দিয়ে
-5. আগে চালু থাকলে Docker Desktop আবার চালু করে; PBX container-গুলো `unless-stopped` policy-তে নিজেই উঠে যায়
+2. চালু থাকলে ৩০ দিনের পুরনো build cache আর অব্যবহৃত image মুছে দেয় (নিচে বিস্তারিত)
+3. ভেতরে TRIM চালায়, তারপর Docker Desktop বন্ধ করে
+4. `wsl --shutdown` চালিয়ে vhdx ফাইল ছাড়া পাওয়া পর্যন্ত অপেক্ষা করে (সর্বোচ্চ ৬০ সেকেন্ড)
+5. `Optimize-VHD -Mode Full` দিয়ে compact করে; সেটা ব্যর্থ হলে diskpart দিয়ে
+6. আগে চালু থাকলে Docker Desktop আবার চালু করে; PBX container-গুলো `unless-stopped` policy-তে নিজেই উঠে যায়
+
+### ৩০ দিনের পুরনো জঞ্জাল মোছা
+
+Compact শুধু ভেতরে আগে থেকে খালি হওয়া জায়গা ফেরত দেয়। তাই compact-এর আগে টাস্কটা পুরনো জঞ্জাল মুছে দেয়:
+
+```powershell
+docker builder prune -af --filter "until=720h"   # ৩০ দিনে ব্যবহার না হওয়া build cache
+docker image prune -af --filter "until=720h"     # কোনো container-এ নেই + ৩০ দিনের বেশি আগে তৈরি image
+```
+
+| মুছবে | মুছবে না |
+| --- | --- |
+| ৩০ দিনের বেশি ব্যবহার না হওয়া build cache | এই মাসের build cache (রোজকার build দ্রুত থাকে) |
+| কোনো container (চালু বা বন্ধ) ব্যবহার করছে না, আর ৩০ দিনের বেশি আগে তৈরি, এমন image | চালু বা বন্ধ container যে image ব্যবহার করছে |
+| | কোনো volume বা database, কখনোই না |
+
+* **Image-এর ক্ষেত্রে "৩০ দিন" মানে তৈরির তারিখ, শেষ ব্যবহারের তারিখ না।** Docker image-এর শেষ ব্যবহারের সময় রাখে না।
+* **উদাহরণ:** কোনো project-এ `docker compose down` দিলে তার container মুছে যায়, তখন image "অব্যবহৃত" হয়ে পড়ে। যেমন `edoburu/pgbouncer` image-টা ৪ মাস আগে তৈরি। RIZ-CRM `down` করা থাকলে শনিবার এটা মুছে যাবে, আর পরের `docker compose up`-এ আবার download বা build হবে। এতে কোনো ডাটা হারাবে না, শুধু একটু সময় লাগবে।
+* **কোনো image রেখে দিতে চাইলে** সেই project অন্তত `docker compose stop` করে রাখুন, `down` না। বন্ধ container থাকলে তার image মোছে না।
+* **মোছা বন্ধ করতে চাইলে** script থেকে `prune` লাইন দুটো মুছে দিন। তখন টাস্ক শুধু compact করবে।
 
 ### টাস্ক নিয়ন্ত্রণ
 
@@ -177,6 +198,11 @@ $wasRunning = (& $docker desktop status 2>$null | Out-String) -match 'running'
 Log "Docker Desktop running before: $wasRunning"
 
 if ($wasRunning) {
+    # Build cache not used for 30 days; images with no container (running or stopped) created 30+ days ago.
+    # Volumes are never touched.
+    Log "pruning build cache and unused images older than 30 days"
+    & $docker builder prune -af --filter "until=720h" 2>&1 | Select-Object -Last 1 | ForEach-Object { Log "  build cache: $_" }
+    & $docker image prune -af --filter "until=720h" 2>&1 | Select-Object -Last 1 | ForEach-Object { Log "  images: $_" }
     Log "fstrim inside docker-desktop"
     wsl -d docker-desktop -u root -e sh -c "fstrim -av" 2>&1 | ForEach-Object { Log "  $_" }
     Log "stopping Docker Desktop"
